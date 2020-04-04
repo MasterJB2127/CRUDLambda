@@ -1,0 +1,81 @@
+service: libros
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  environment:
+    BOOK_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+      Resource: "*"
+
+functions:
+  candidateSubmission:
+    handler: api/libros.submit
+    memorySize: 128
+    description: Submit books.
+    events:
+      - http: 
+          path: libros
+          method: post
+          cors: true
+  listCandidates:
+    handler: api/libros.list
+    memorySize: 128
+    description: List all books
+    events:
+      - http: 
+          path: libros
+          method: get
+          cors: true
+  candidateDetails:
+    handler: api/libros.get
+    events:
+      - http:
+          path: libros/{id}
+          method: get
+          cors: true
+  updateCandidate:
+    handler: api/libros.updateBook
+    events:
+      - http:
+          path: libros/{id}
+          method: put
+          cors: true
+  deleteCandidate:
+    handler: api/libros.delete
+    events:
+      - http:
+          path: libros/{id}
+          method: delete
+          cors: true
+   
+
+resources:
+  Resources:
+    CandidatesDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "id"
+            AttributeType: "S"   
+        KeySchema:
+          -
+            AttributeName: "id"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: "NEW_AND_OLD_IMAGES"
+        TableName: ${self:provider.environment.BOOK_TABLE}

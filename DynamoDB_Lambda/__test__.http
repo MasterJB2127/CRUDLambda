@@ -1,0 +1,27 @@
+POST https://yal7hh6nfa.execute-api.us-east-1.amazonaws.com/dev/libros
+Content-Type: application/json
+
+{
+	"title":"Emprendedores",
+	"description": "Consejos", 
+	"price":100
+}
+
+###
+GET  https://yal7hh6nfa.execute-api.us-east-1.amazonaws.com/dev/libros
+
+
+###
+GET https://yal7hh6nfa.execute-api.us-east-1.amazonaws.com/dev/libros/6632db00-7633-11ea-83af-a360da84796e
+
+###
+PUT https://hks256mx04.execute-api.us-east-2.amazonaws.com/dev/candidates/d65ac130-758a-11ea-8d1c-a70c8104d3cf
+Content-Type: application/json
+
+{
+	"fullname":"Nancy Loyola",
+	"email": "nancy4@gmail.com"
+}
+
+###
+DELETE https://hks256mx04.execute-api.us-east-2.amazonaws.com/dev/candidates/d65ac130-758a-11ea-8d1c-a70c8104d3cf
