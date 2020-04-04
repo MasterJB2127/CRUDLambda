@@ -1,35 +1,30 @@
-# lambda-nodejs-dynamodb
-
-_Adjunto al proyecto se encuentra un archivo .http, puede instalar la extension para VSCODE y realizar las pruebas ahi mismo_
-
-Esta es la llamada a los puntos finales:
-
-### Para ingresar un registro
+### Ingresar un registro
 POST https://yal7hh6nfa.execute-api.us-east-1.amazonaws.com/dev/libros
 Content-Type: application/json
 
 {
 	"title":"",
 	"description": "", 
-	"price":
+	"price":12
 }
 
-### Para leer todos los registros
+### Leer todos lo que contiene la base de datos
 GET  https://yal7hh6nfa.execute-api.us-east-1.amazonaws.com/dev/libros
 
 
-### Para buscar un registro por id
+### Buscar un registro especifico
 GET https://yal7hh6nfa.execute-api.us-east-1.amazonaws.com/dev/libros/{id}
 
-### Para actualizar un registro por su id
+### Actualizar un registro por id
 PUT https://yal7hh6nfa.execute-api.us-east-1.amazonaws.com/dev/libros/{id}
 Content-Type: application/json
 
 {
 	"title":"",
-	"description": ""
+	"description": "",
+	"price":12
 }
 
-### Para borrar un registro por su id
+### Borrar un registro específico
 DELETE https://yal7hh6nfa.execute-api.us-east-1.amazonaws.com/dev/libros/{id}
 
